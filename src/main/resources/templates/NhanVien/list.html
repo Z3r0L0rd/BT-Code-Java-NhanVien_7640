@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NhanVien List</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<div class="container">
+    <h1>Danh sách nhân viên</h1>
+    <table class="table">
+        <tr>
+            <th>Mã NV</th>
+            <th>Tên NV</th>
+            <th>Phái</th>
+            <th>Nơi Sinh</th>
+            <th>Phòng Ban</th>
+            <th>Lương</th>
+            <th>Chức năng</th>
+        </tr>
+        <tr th:each="nhanVien : ${NhanVien}">
+            <td th:text="${nhanVien.Ma_NV}">Mã NV</td>
+            <td th:text="${nhanVien.Ten_NV}">Tên NV</td>
+            <td ><img th:src="@{${nhanVien.Phai == 'NU' ? '/images/nu.png' : '/images/nam.png'}}" alt="Gender" class="img-thumbnail" style="width: 50px; height: 50px;"></td>
+            <td th:text="${nhanVien.Noi_Sinh}">Nơi Sinh</td>
+            <td th:text="${nhanVien.phongBan != null ? nhanVien.phongBan.Ten_Phong : 'N/A'}">Phòng Ban</td>
+            <td th:text="${nhanVien.Luong}">Lương</td>
+            <th><a th:href="@{/Nhan_Vien/edit/{id}(id=${nhanVien.Ma_NV})}" class="btn btn-primary btn-sm">Edit</a></th>
+            <th><a th:href="@{/Nhan_Vien/delete/{id}(id=${nhanVien.Ma_NV})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a></th>
+        </tr>
+    </table>
+</div>
+<th:block th:replace="~{layout :: footer}"></th:block>
+</body>
+</html>

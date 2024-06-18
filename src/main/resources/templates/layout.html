@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+              lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My app/2180607640</title>
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Lưu Hoàng Anh Khoa-2180607640</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/nhan_vien}">Home</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white active" aria-current="page" th:href="@{/Nhan_Vien}">List Nhân viên</a></li>
+                    <li class="nav-item"><a class="nav-link text-white active" aria-current="page" th:href="@{/phong_bans}">List Phòng Ban</a></li>
+                    <li class="nav-item" ><a th:href="@{/Nhan_Vien/add}" class="nav-link text-white">Add New NhanVien</a></li>
+                    <li class="nav-item" ><a th:href="@{/phong_bans/add}" class="nav-link text-white">Add New PhongBan</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-9 align-items-center">
+                    <li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">
+                        <span class="navbar-text text-white">
+                            Xin chào, <span sec:authentication="name" style="margin-right: 20px;"></span>
+                        </span>
+                    </li>
+                    <li class="nav item" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="post">
+                            <button class="btn btn-outline-danger" type="submit">logout</button>
+                        </form>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="btn btn-outline-primary" href="/login">Login</a>
+                    </li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container mt-5" th:insert="~{::${content}}">
+    <!--Nội dung trang con-->
+</div>
+<footer th:fragment="footer">
+    <script th:src="@{/js/boostrap.min.js}"></script>
+</footer>
+</body>
+</html>

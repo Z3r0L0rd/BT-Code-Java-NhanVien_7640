@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Form Thêm Phong Ban</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <th:block th:replace="~{layout :: link-css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{layout :: header}"></th:block>
+<section layout:fragment="content" class="container mt-5">
+    <h1 class="mb-4">Form PhongBan</h1>
+    <form th:action="@{/phong_bans/add}" th:object="${PhongBan}" method="post">
+        <div class="mb-3">
+            <label for="Ma_Phong" class="form-label">Ma Phong:</label>
+            <input type="text" id="Ma_Phong" th:field="*{Ma_Phong}" class="form-control"/>
+            <div class="text-danger" th:if="${#fields.hasErrors('Ma_Phong')}" th:errors="*{Ma_Phong}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="Ten_Phong" class="form-control">Ten Phong:</label>
+            <input type="text" id="Ten_Phong" th:field="*{Ten_Phong}" class="form-control"/>
+            <div class="text-danger" th:if="${#fields.hasErrors('Ten_Phong')}" th:errors="*{Ten_Phong}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
+<th:block th:replace="~{layout :: footer}"></th:block>
+</body>
+</html>
